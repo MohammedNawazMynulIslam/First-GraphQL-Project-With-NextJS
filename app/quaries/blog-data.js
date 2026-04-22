@@ -45,6 +45,9 @@ readTimeInMinutes
 
 export const getPost = async (slug) => {
   const client = getClient();
+  if (!slug || typeof slug !== "string") {
+    throw new Error(`getPost(slug) expected a non-empty string, got: ${slug}`);
+  }
   const data = await client.request(
     gql`
       query postDetails($slug: String!){
@@ -71,7 +74,7 @@ export const getPost = async (slug) => {
       }
   }
       `,
-    { slug: slug },
+    { slug },
   );
   return data.publication.post;
 };

@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllPosts } from '../../quaries/blog-data';
 import { LatestPost } from './latest-post';
+import { PostCard } from './post-card';
 
 export const PostList = async () => {
     const posts = await getAllPosts();
@@ -20,11 +21,11 @@ export const PostList = async () => {
       {restPosts.length > 0 && (
         <div className="mb-8">
           <div className="grid gap-4 mt-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-            {/* {restPosts.map((post) => (
+            {restPosts.map((post) => (
               <div key={post.node.slug}>
-                <PostCard post={post} />
+                <PostCard post={post.node} />
               </div>
-            ))} */}
+            ))}
             <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
               Load More
             </button>
