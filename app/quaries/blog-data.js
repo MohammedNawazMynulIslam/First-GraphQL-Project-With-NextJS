@@ -37,7 +37,7 @@ readTimeInMinutes
       }
       }
       `,
-    { tags: tags },
+    { tag: tags },
   );
 
   return data.publication.posts.edges;

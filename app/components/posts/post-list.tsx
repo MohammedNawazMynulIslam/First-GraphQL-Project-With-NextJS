@@ -1,16 +1,14 @@
-import React from 'react'
-import { getAllPosts } from '../../quaries/blog-data';
+
 import { LatestPost } from './latest-post';
 import { PostCard } from './post-card';
 
-export const PostList = async () => {
-    const posts = await getAllPosts();
+export const PostList =  ({posts}) => {
+    
    
 
     // posts sorted by time
   const latestPosts = posts[0].node
-  console.log(latestPosts)
-    // rest of the posts
+  
     const restPosts = posts.slice(1);
   return (
     <>
