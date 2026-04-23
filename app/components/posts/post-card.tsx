@@ -1,25 +1,46 @@
-import Link from 'next/link'
-import React from 'react'
-import {getFormattedDate} from "../../utils/index"
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
 
-export const PostCard = ({post}) => {
+import { getFormattedDate } from '../../utils/index';
+
+export const PostCard = ({ post }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-      <Link href={`/blog/${post?.slug}`}>
-        <Image
-          className="mt-4 object-cover rounded-md xs:w-full sm:w-full md:w-2/3 lg:w-2/3 xl:1/2 2xl:w-1/3 h-auto"
-          width={500}
-          height={500}
-          alt={post.title}
-          src={post?.coverImage?.url}
-        />
-        <h3 className="text-xl font-semibold p-4">{post.title}</h3>
-        <p className="text-gray-500">
-          Posted on {getFormattedDate(post?.publishedAt)}
-        </p>
-        <p className="mt-2 text-gray-700 p-4">{post.brief}</p>
-      </Link>
-    </div>
+    <Link href={`/blog/${post?.slug}`} className="group block h-full">
+      <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-xl">
+        <div className="relative h-56 overflow-hidden bg-slate-100">
+          <Image
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width={1200}
+            height={800}
+            alt={post.title}
+            src={post?.coverImage?.url}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
+        </div>
+
+        <div className="flex flex-1 flex-col gap-4 p-5">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-600">
+              Blog post
+            </p>
+            <h3 className="text-lg font-semibold leading-7 text-slate-900 transition-colors group-hover:text-sky-700">
+              {post.title}
+            </h3>
+            <p className="text-sm text-slate-500">
+              Posted on {getFormattedDate(post?.publishedAt)}
+            </p>
+          </div>
+
+          <p className="line-clamp-3 text-sm leading-6 text-slate-600">
+            {post.brief}
+          </p>
+
+          <div className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-sky-700 transition-transform group-hover:translate-x-0.5">
+            <span>Read article</span>
+            <span aria-hidden="true">→</span>
+          </div>
+        </div>
+      </article>
+    </Link>
   );
-}
+};
